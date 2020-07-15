@@ -7,9 +7,19 @@
  * @param  string  $input
  * @return string
  */
-function snakeCaseToCamelCase(string $input)
+function snakeCaseToCamelCase(string $input, $capitalizeFirstCharacter = true)
 {
+
+    $str = str_replace('_', '', ucwords($input, '_'));
+
+    if ($capitalizeFirstCharacter) {
+        $str = lcfirst($str);
+    }
+
+    return $str;
 }
+
+echo snakeCaseToCamelCase('hello_world');
 
 /**
  * The $input variable contains multibyte text like 'ФЫВА олдж'
@@ -19,9 +29,20 @@ function snakeCaseToCamelCase(string $input)
  * @param  string  $input
  * @return string
  */
-function mirrorMultibyteString(string $input)
+function mirrorMultibyteString(string $input, $encoding='UTF-8')
 {
+    $arr_input = explode(" ", $input);
+
+    $out = "";
+    foreach($arr_input as $value){
+
+        $out .= mb_convert_encoding( strrev( mb_convert_encoding($value, 'UTF-16BE', $encoding) ), $encoding, 'UTF-16LE')." ";
+
+    }
+    return $out;
+
 }
+echo mirrorMultibyteString("Привет Мир");
 
 /**
  * My friend wants a new band name for her band.
@@ -39,4 +60,6 @@ function mirrorMultibyteString(string $input)
  */
 function getBrandName(string $noun)
 {
+
+
 }
