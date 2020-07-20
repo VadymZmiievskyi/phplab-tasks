@@ -8,9 +8,21 @@
  * @param  array  $input
  * @return array
  */
-function repeatArrayValues(array $input)
-{
+function repeatArrayValues(array $input) {
+    $arr = [];
+    foreach ($input as $value) {
+        $x = $value;
+        while ($x > 0) {
+            /*$x++;
+             *array_push($arr, $value);
+             */
+            $arr[] = $value;
+            $x--;
+        }
+    }
+    return $arr;
 }
+
 
 /**
  * The $input variable contains an array of digits
@@ -20,9 +32,20 @@ function repeatArrayValues(array $input)
  * @param  array  $input
  * @return int
  */
-function getUniqueValue(array $input)
+function getUniqueValue(array $input): int
 {
+    $new_arr = [];
+    foreach ($input as $value) {
+        if (count(array_keys($input, $value)) === 1) {
+            array_push($new_arr, $value);
+        }
+    }
+    if (empty($new_arr)) {
+        return 0;
+    }
+    return min($new_arr);
 }
+
 
 /**
  * The $input variable contains an array of arrays
@@ -48,6 +71,20 @@ function getUniqueValue(array $input)
  * @param  array  $input
  * @return array
  */
-function groupByTag(array $input)
+
+function groupByTag(array $input):array
 {
+    $arr=[];
+
+    foreach ($input as $value) {
+        foreach ($value['tags'] as $key => $tag_val) {
+            $array[$tag_val][]=$value['name'];
+        }
+    }
+
+    foreach ($arr as $key => &$value) {
+        sort($value);
+    }
+
+    return $arr;
 }

@@ -39,7 +39,7 @@ function mirrorMultibyteString(string $input, $encoding='UTF-8')
         $out .= mb_convert_encoding( strrev( mb_convert_encoding($value, 'UTF-16BE', $encoding) ), $encoding, 'UTF-16LE')." ";
 
     }
-    return $out;
+    return rtrim($out);
 
 }
 echo mirrorMultibyteString("Привет Мир");
