@@ -60,24 +60,17 @@ echo mirrorMultibyteString("Привет Мир");
  */
 function getBrandName(string $noun)
 {
-    $f_let=substr(trim($noun),0,1);
+    $noun = strtolower($noun);
 
-    $preg=preg_match("/(^$f_let{1})(\w*)($f_let$)/u",$noun);
+    if (substr($noun, 0, 1) === substr($noun, -1)) {
 
-    $input='';
+        $result = ucwords($noun . substr($noun, 1));
 
-    if($preg){
+    } else {
 
-        $input=preg_replace_callback("/(^$f_let{1})(\w*)/",'change',$noun);
-
-    }else{
-
-        $input='The '.ucfirst($noun);
-
+        $result = 'The ' . ucwords($noun);
     }
-
-    return $input;
-
+    return $result;
 }
 
 

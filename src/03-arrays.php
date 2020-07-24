@@ -12,11 +12,12 @@ function repeatArrayValues(array $input) {
     $arr = [];
     foreach ($input as $value) {
         $x = $value;
-        while ($x > 0) {
+        while ($x> 0) {
             /*$x++;
              *array_push($arr, $value);
              */
             $arr[] = $value;
+
             $x--;
         }
     }
@@ -72,19 +73,20 @@ function getUniqueValue(array $input): int
  * @return array
  */
 
-function groupByTag(array $input):array
+function groupByTag(array $input): array
 {
+    array_multisort($input);
     $arr=[];
 
     foreach ($input as $value) {
         foreach ($value['tags'] as $key => $tag_val) {
-            $array[$tag_val][]=$value['name'];
+            $arr[$tag_val][]=$value['name'];
         }
     }
 
-    foreach ($arr as $key => &$value) {
-        sort($value);
-    }
+    ksort($arr);
 
     return $arr;
 }
+
+

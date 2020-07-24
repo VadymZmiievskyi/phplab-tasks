@@ -14,30 +14,35 @@ function getMinuteQuarter($minute)
 {
 
 
-    if ($minute >= 0 and $minute <= 14) {
-        return " first";
+    if ($minute >= 1 and $minute <= 15) {
+        return rtrim("first");
     }
 
-    if ($minute <= 15 and $minute >= 30) {
-        return "second";
+    if ($minute >= 16 and $minute <= 30) {
+        return rtrim("second");
     }
 
-    if ($minute <= 31 and $minute >= 45) {
-        return"third";
+    if ($minute >= 31 and $minute <= 45) {
+        return rtrim("third");
     }
 
 
-    if ($minute >= 46 and $minute <= 59) {
-        return"fourth";
+    if ($minute >= 46 and $minute <= 59 ) {
+        return rtrim("fourth");
     }
 
-    if($minute > 60){
+
+    if($minute > 61){
         throw new InvalidArgumentException("must be < than 60");
+    }
+
+    if ($minute <= 0) {
+        return rtrim("fourth");
     }
 }
 
 try{
-    echo getMinuteQuarter(5);
+    echo getMinuteQuarter(75);
 
 }catch (\InvalidArgumentException $e){
     echo $e->getMessage();
@@ -56,32 +61,27 @@ try{
  * @throws InvalidArgumentException
 */
 
-function isLeapYear($year){
+function isLeapYear($year): bool
+{
 
     if($year < 1900){
         throw new InvalidArgumentException("must be > than 1990");
-    }elseif($year == 2000){
-        throw new InvalidArgumentException("true");
-    }elseif($year % 4 !=0) {
-        return"false";
-    }elseif($year % 100 !=0){
-        return"true";
-
-
-    }elseif($year / 400 !=0){
-        return"false";
-
     }
-    else{
-        return"true";
+    if($year == 2000 && $year % 100 !=0 ){
+        return true;
+    }
+    if($year % 4 !=0 && $year / 400 !=0) {
+        return false;
+    } else{
+        return true;
     }
 }
 
 try{
-    echo isLeapYear(2000);
+    echo isLeapYear(2400);
 
-}catch (\InvalidArgumentException $a){
-    echo $a->getMessage();
+}catch (\InvalidArgumentException $e){
+    echo $e->getMessage();
 }
 
 /**
@@ -97,7 +97,7 @@ try{
 */
 function isSumEqual(string $input) {
 
-    if(mb_strlen($input) > 6) {
+    if(mb_strlen($input) > 6 || mb_strlen($input) < 6 ) {
         throw new InvalidArgumentException("should be 6 values");
 
     }
