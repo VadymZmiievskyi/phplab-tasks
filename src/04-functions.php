@@ -67,6 +67,7 @@ function countArguments()
  * @return array
  * @throws InvalidArgumentException
  */
+//
 function countArgumentsWrapper()
 {
     foreach (func_get_args() as $arg) {
