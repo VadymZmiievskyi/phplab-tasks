@@ -6,12 +6,50 @@
  *
  * Create a PhpUnit test (GetUniqueFirstLettersTest) which will check this behavior
  *
- * @param  array  $airports
+ * @param array $airports
  * @return string[]
  */
 function getUniqueFirstLetters(array $airports)
 {
-    // put your logic here
+    $lettersAirports = [];
+    foreach ($airports as $airport) {
+        $lettersAirports[] = ucfirst($airport['name'][0]);
+    }
 
-    return ['A', 'B', 'C'];
+    $result = array_unique($lettersAirports);
+    sort($result);
+
+
+    return $result;
 }
+
+
+function filteringAirportsByFirstLetter($airports, $letter)
+{
+    $newArr = [];
+    foreach ($airports as $air) {
+        if ($air['name'][0] === $letter) {
+            $newArr[] = $air;
+        }
+    }
+
+
+    return $newArr;
+}
+
+function filteringAirportsByState($airports, $state)
+{
+    return array_filter($airports, function ($k) use ($state) {
+        return $k['state'] == $state;
+    });
+}
+
+
+function sortTableInfoByColumn($airports, $column)
+{
+    $stateColumn = array_column($airports, $column);
+    array_multisort($stateColumn, SORT_ASC, $airports);
+
+    return $airports;
+}
+

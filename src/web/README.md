@@ -3,7 +3,7 @@
 For more details https://www.php.net/manual/en/features.commandline.webserver.php 
 
  * `cd` into `web` folder
- * Execute in terminal `php -S localhost:8000`
+ * Execute in terminal ``
  * Open in browser `http://localhost:8000`
  
 ## TODO
