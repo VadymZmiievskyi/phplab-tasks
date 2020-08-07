@@ -15,7 +15,7 @@ if (isset($_POST['text'])) {
     <input type="submit" name="submit"/>
 </form>
 */
-/
+
 require_once './functions.php';
 
 $airports = require './airports.php';
